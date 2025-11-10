@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="mediaqueries.css" />
   </head>
   <body>
-    <nav id="desktop-nav">
+  <nav id="desktop-nav" class="fade-in">
       <div class="logo">Ashutosh Kumar</div>
       <div>
         <ul class="nav-links">
@@ -21,7 +21,7 @@
         </ul>
       </div>
     </nav>
-    <nav id="hamburger-nav">
+  <nav id="hamburger-nav" class="slide-in-right">
       <div class="logo">Ashutosh Kumar</div>
       <div class="hamburger-menu">
         <div class="hamburger-icon" onclick="toggleMenu()">
@@ -38,15 +38,20 @@
         </div>
       </div>
     </nav>
-    <section id="profile">
+  <section id="profile" class="fade-in">
       <div class="section__pic-container">
-        <img src="./assets/profile-pic.png" alt="Ashutosh Kumar profile picture" />
+        <div class="hero-img-appear">
+          <img src="./assets/profile-pic.png" alt="Ashutosh Kumar profile picture" class="floating-img" />
+        </div>
       </div>
       <div class="section__text">
         <p class="section__text__p1">Hello, I'm</p>
         <h1 class="title">Ashutosh Kumar</h1>
         <p class="section__text__p2">Simulation Engineer</p>
-        <div class="btn-container">
+        <p class="hero-description" >
+          I specialize in Computational Fluid Dynamics, Scientific Machine Learning, and simulation-driven design. Passionate about solving real-world engineering challenges with innovative, research-driven solutions. My work bridges the gap between physics-based modeling and AI, enabling smarter, faster, and more reliable engineering outcomes for next-generation technologies.
+        </p>
+        <div class="btn-container fade-in-delay-1">
           <button
             class="btn btn-color-2"
             onclick="window.open('./assets/resume-example.pdf')"
@@ -57,7 +62,7 @@
             Contact Info
           </button>
         </div>
-        <div id="socials-container">
+        <div id="socials-container" class="fade-in-delay-2">
           <img
             src="./assets/linkedin.png"
             alt="My LinkedIn profile"
@@ -73,7 +78,7 @@
         </div>
       </div>
     </section>
-    <section id="about">
+  <section id="about" class="slide-in-left">
       <p class="section__text__p1">Get To Know More</p>
       <h1 class="title">About Me</h1>
       <div class="section-container">
@@ -85,7 +90,7 @@
           />
         </div>
         <div class="about-details-container">
-          <div class="about-containers">
+          <div class="about-containers fade-in-delay-1">
             <div class="details-container">
               <img
                 src="./assets/experience.png"
@@ -105,7 +110,7 @@
               <p>B.Tech in Mechanical Engineering<br />Post Graduation in CFD Skill Lync</p>
             </div>
           </div>
-          <div class="text-container">
+          <div class="text-container fade-in-delay-2">
             <p>
               Mechanical engineer specializing in CFD and scientific computing with experience in OpenFOAM (C++), thermo-fluid and multiphase modeling, and solver development. Proficient in hybrid meshing, heat transfer, and solidification simulations, with exploratory work on 2D PINNs using PyTorch and JAX. Strong in numerical methods and physics-based modeling with a research-driven mindset. Currently exploring Fourier Neural Operators and SciML frameworks for physics-foundation model development, alongside studies in flight dynamics and control for robust preliminary sizing of Urban Air Mobility vehicles.
             </p>
@@ -119,13 +124,13 @@
         onclick="location.href='./#expertise'"
       />
     </section>
-    <section id="expertise">
+  <section id="expertise" class="fade-in">
   <p class="section__text__p1">What I Work On</p>
   <h1 class="title">Expertise</h1>
 
   <div class="expertise-grid">
     <!-- Fluid Dynamics -->
-    <div class="expertise-card light">
+    <div class="expertise-card light fade-in-delay-2">
       <div class="expertise-icon dark">
         <img src="./assets/heli-icon.png" alt="Fluid Dynamics Icon" />
       </div>
@@ -136,7 +141,7 @@
     </div>
 
     <!-- Design Optimization -->
-    <div class="expertise-card dark-bg">
+    <div class="expertise-card dark-bg fade-in-delay-1">
       <div class="expertise-icon dark">
         <img src="./assets/gears-icon.png" alt="Design Optimization Icon" />
       </div>
@@ -147,7 +152,7 @@
     </div>
 
     <!-- Scientific ML -->
-    <div class="expertise-card light">
+    <div class="expertise-card light fade-in-delay-2">
       <div class="expertise-icon dark">
         <img src="./assets/robotarm-icon.png" alt="Scientific ML Icon" />
       </div>
@@ -165,12 +170,12 @@
   />
 </section>
 
-<section id="projects">
+<section id="projects" class="slide-in-right">
   <p class="section__text__p1">Browse My Recent</p>
   <h1 class="title">Projects</h1>
   <div class="experience-details-container">
     <div class="about-containers">
-    <div class="details-container color-container">
+    <div class="details-container color-container fade-in-delay-1">
       <div class="article-container">
         <img 
           src="./assets/project-1.png"
@@ -190,7 +195,7 @@
         </button>
       </div>
     </div>
-        <div class="details-container color-container">
+        <div class="details-container color-container fade-in-delay-2">
       <div class="article-container">
         <img 
           src="./assets/project-2.png"
@@ -210,7 +215,7 @@
         </button>
       </div>
     </div>
-        <div class="details-container color-container">
+        <div class="details-container color-container fade-in-delay-3">
       <div class="article-container">
         <img 
           src="./assets/project-3.png"
@@ -241,7 +246,7 @@
   />
 </section>
 
-  <section class="contact" id="contact">
+  <section class="contact fade-in" id="contact">
     <h2 class="section-title">Let's Collaborate?</h2>
 
     <!-- Added Intro Text -->
@@ -350,6 +355,35 @@
       },
     });
   }
+</script>
+
+<script>
+  // Section fade/slide-in on scroll with stagger for project cards
+  function revealOnScroll() {
+    const animatedEls = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, #projects .details-container, .fade-in-delay-1, .fade-in-delay-2');
+    const windowHeight = window.innerHeight;
+    // collect project items to compute index for stagger
+    const projectItems = Array.from(document.querySelectorAll('#projects .details-container'));
+
+    animatedEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < windowHeight - 60) {
+        // if this is a project card, set a small stagger delay based on its index
+        if (el.closest && el.closest('#projects') && el.classList.contains('details-container')) {
+          const i = projectItems.indexOf(el);
+          const delay = Math.min(i * 0.12, 0.6); // cap delay to avoid long waits
+          el.style.setProperty('--delay', delay + 's');
+        } else {
+          // other elements get a tiny default delay removed
+          el.style.setProperty('--delay', '0s');
+        }
+        el.classList.add('visible');
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', revealOnScroll);
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('resize', revealOnScroll);
 </script>
 
 <script src="script.js"></script>
