@@ -318,6 +318,7 @@ section {
 
 /* Expertise Section */
 #expertise {
+  position: relative;
   padding: 4vh 0;
   text-align: center;
 }
@@ -398,3 +399,7 @@ section {
     width: 85%;
   }
 }
+
+/* PROJECTS */
+
+
