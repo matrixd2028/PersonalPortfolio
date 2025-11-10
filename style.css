@@ -59,6 +59,37 @@
   display: block;
 }
 
+/* Aura cursor: grayscale laggy circular aura that applies a backdrop-filter inside the circle
+   Only the region inside the circle is desaturated; rest of the page stays unchanged. */
+.aura-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform, opacity;
+  transition: opacity 200ms linear, width 240ms ease, height 240ms ease;
+  z-index: 9999;
+  opacity: 0;
+  /* Darker grey semi-transparent fill */
+  background: rgba(216, 216, 216, 0.137);
+  /* Desaturate the region under the circle */
+  backdrop-filter: grayscale(60%) contrast(1.2) brightness(1);
+  -webkit-backdrop-filter: grayscale(60%) contrast(1.2) brightness(0.9);
+  box-shadow: 0 12px 20px rgba(63, 63, 63, 0.45), inset 0 6px 18px rgba(255,255,255,0.02);
+}
+.aura-cursor.visible {
+  opacity: 1;
+}
+.aura-cursor.small {
+  width: 15px;
+  height: 15px;
+}
+
+
 /* Staggered fade-in delays for buttons and icons */
 .fade-in-delay-1 {
   opacity: 0;

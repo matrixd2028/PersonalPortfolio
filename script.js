@@ -109,3 +109,65 @@ function toggleMenu() {
     });
   });
 })();
+
+// Grayscale laggy aura cursor — applies a desaturation/backdrop-filter inside the circular aura only.
+(function() {
+  // Disable on touch devices (avoid performance and UX issues)
+  const isTouch = (typeof navigator !== 'undefined' && (navigator.maxTouchPoints && navigator.maxTouchPoints > 0)) || ('ontouchstart' in window);
+  if (isTouch) return;
+
+  const aura = document.createElement('div');
+  aura.className = 'aura-cursor';
+  document.body.appendChild(aura);
+
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let curX = targetX;
+  let curY = targetY;
+  const ease = 0.015; // much more laggy so the pointer can move out of the circle
+  let rafId = null;
+  let visibleTimeout = null;
+
+  function raf() {
+    curX += (targetX - curX) * ease;
+    curY += (targetY - curY) * ease;
+    aura.style.transform = `translate3d(${curX}px, ${curY}px, 0) translate(-50%, -50%)`;
+    rafId = requestAnimationFrame(raf);
+  }
+
+  function showAura() {
+    aura.classList.add('visible');
+    if (!rafId) rafId = requestAnimationFrame(raf);
+  }
+
+  function hideAura() {
+    aura.classList.remove('visible');
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  document.addEventListener('pointermove', (e) => {
+    if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+    targetX = e.clientX;
+    targetY = e.clientY;
+    showAura();
+    // hide after 1s of inactivity
+    if (visibleTimeout) clearTimeout(visibleTimeout);
+    visibleTimeout = setTimeout(() => { hideAura(); }, 1000);
+  });
+
+  document.addEventListener('pointerleave', () => {
+    if (visibleTimeout) clearTimeout(visibleTimeout);
+    hideAura();
+  });
+
+  // Shrink aura over interactive elements for precision
+  document.addEventListener('pointerover', (e) => {
+    const btn = e.target.closest && e.target.closest('button, a, .icon');
+    if (btn) aura.classList.add('small');
+  });
+  document.addEventListener('pointerout', (e) => {
+    const btn = e.target.closest && e.target.closest('button, a, .icon');
+    if (btn) aura.classList.remove('small');
+  });
+
+})();
