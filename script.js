@@ -16,7 +16,7 @@ function toggleMenu() {
   let targetX = 0, targetY = 0;
   let currentX = 0, currentY = 0;
   const maxOffset = 10; // maximum px movement opposite to cursor
-  const ease = 0.12;
+  const ease = 0.1;
   let rafId = null;
 
   function onPointerMove(e) {
