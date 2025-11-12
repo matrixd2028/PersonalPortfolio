@@ -124,7 +124,7 @@ function toggleMenu() {
   let targetY = window.innerHeight / 2;
   let curX = targetX;
   let curY = targetY;
-  const ease = 0.2; // much more laggy so the pointer can move out of the circle
+  const ease = 0.02; // much more laggy so the pointer can move out of the circle
   let rafId = null;
   let visibleTimeout = null;
 
